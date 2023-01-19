@@ -6,12 +6,14 @@ data management operations (Create/Read/Update/Delete; CRUD).
 
 The app will be built under the Model-View-Controller paradigm (MVC) and it's folder will be structured as follows:
 
-minmal-app
-  src
-    ctrl
-    model
-    view
-  index.html
+minmal-app [
+  [src
+    [ctrl],
+    [model],
+    [view]
+  ]
+  [index.html]
+]
   
 For a MVC review, refer to: https://www.codecademy.com/article/mvc
 
