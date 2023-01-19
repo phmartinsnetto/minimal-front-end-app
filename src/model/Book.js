@@ -1,3 +1,4 @@
+// Our Book object
 function Book( slots) {
     this.isbn = slots.isbn;
     this.title = slots.title;
