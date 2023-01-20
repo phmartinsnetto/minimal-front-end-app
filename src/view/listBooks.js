@@ -17,4 +17,4 @@ pl.view.listBooks = {
         row.insertCell(-1).textContent = Book.instances[key].year;
       }
     }
-}
+};

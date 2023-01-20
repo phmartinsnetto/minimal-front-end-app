@@ -1,13 +1,18 @@
 // Our Book object
-function Book( slots) {
+function Book(slots) {
     this.isbn = slots.isbn;
     this.title = slots.title;
     this.year = slots.year;
-}
+};
 
 // Collection of all books
 Book.instances = {};
 
+// static class method
+Book.convertRow2Obj = function (bookRow) {
+    var book = new Book( bookRow);
+    return book;
+};
 // Using Local Storage API to store book data.
 // Local Storage only allows for string values,
 // so all data there will be in JSON format.
@@ -34,14 +39,14 @@ Book.loadAll = function () {
             Book.instances[key] = Book.convertRow2Obj(bookTable[key]);
         }
     }
-}
+};
 
 // Saving all Book instances
 // Function for serialization: JSON.stringify
 Book.saveAll = function () {
     var bookTableString = "";
     var error = false;
-    var nmrOrBooks = Object.keys(Book.instances).length;
+    var nmrOfBooks = Object.keys(Book.instances).length;
     try {
         bookTableString = JSON.stringify(Book.instances);
         localStorage["bookTable"] = bookTableString;
@@ -50,14 +55,14 @@ Book.saveAll = function () {
         error = true;
     }
     if (!error) console.log(nmrOfBooks + " books saved.");
-}
+};
 
 // Creating a new Book instance and addin to collection
 Book.add = function (slots) {
     var book = new Book(slots);
     Book.instances[slots.isbn] = book;
     console.log("Book " + slots.isbn + " created!");
-}
+};
 
 // Book updating
 Book.update = function (slots) {
@@ -66,7 +71,7 @@ Book.update = function (slots) {
     if (book.title !== slots.title) {book.title = slots.title;}
     if (book.year !== year) {book.year = year;}
     console.log("Book " + slots.isbn + " modified!");
-}
+};
 
 // Deleting a book instance
 Book.destroy = function (isbn) {
@@ -76,7 +81,7 @@ Book.destroy = function (isbn) {
     } else {
         console.log("There is no book with ISBN " + isbn + " in the database!");
     }
-}
+};
 
 // Creating test data
 Book.createTestData = function () {
@@ -84,11 +89,11 @@ Book.createTestData = function () {
     Book.instances["0465026567"] = new Book({isbn:"0465026567", title:"Gödel, Escher, Bach", year:1999});
     Book.instances["0465030793"] = new Book({isbn:"0465030793", title:"I Am A Strange Loop", year:2008});
     Book.saveAll();
-}
+};
 
 // Clearing all data
 Book.clearData = function () {
     if (confirm("Do you really want to delete all book data?")) {
         localStorage["bookTable"] = "{}";
     }
-}
+};

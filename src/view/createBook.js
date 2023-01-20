@@ -9,5 +9,13 @@ pl.view.createBook = {
         window.addEventListener("beforeunload", function () {
             Book.saveAll();
         });
+    },
+    handleSaveButtonClickEvent: function () {
+        var formEl = document.forms['Book'];
+        var slots = { isbn: formEl.isbn.value, 
+            title: formEl.title.value, 
+            year: formEl.year.value};
+        Book.add( slots);
+        formEl.reset();
     }
-}
+};
